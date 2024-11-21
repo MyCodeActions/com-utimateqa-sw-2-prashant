@@ -32,10 +32,10 @@ public class LoginTest extends BaseTest {
     @Test
     public void userShouldNavigateToLoginPageSuccessfully() {
 
-        driver.findElement(By.xpath("/html/body/header/div[2]/div/nav/ul/li/a")).click();
+        driver.findElement(By.xpath("//a[@href='/users/sign_in']")).click();
 
         String expectedText = "Welcome Back!";
-        String actualText = driver.findElement(By.xpath("//*[@id=\"main-content\"]/div/div/article/h2")).getText();
+        String actualText = driver.findElement(By.xpath("//article[1]/h2")).getText();
         Assert.assertEquals(expectedText, actualText);
     }
 
@@ -43,14 +43,14 @@ public class LoginTest extends BaseTest {
     @Test
     public void verifyTheErrorMessage() {
 
-        driver.findElement(By.xpath("/html/body/header/div[2]/div/nav/ul/li/a")).click();
+        driver.findElement(By.xpath("//a[@href='/users/sign_in']")).click();
         driver.findElement(By.id("user[email]")).sendKeys("abc@gmail.com");
         driver.findElement(By.name("user[password]")).sendKeys("123456");
 
         driver.findElement(By.className("button")).click();
 
         String expectedText = "Invalid email or password.";
-        String actualText = driver.findElement(By.xpath("//*[@id=\"notice\"]/ul/li")).getText();
+        String actualText = driver.findElement(By.xpath("//li[@class='form-error__list-item']")).getText();
         Assert.assertEquals(expectedText, actualText);
     }
 
